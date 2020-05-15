@@ -1,6 +1,10 @@
 {
   "name": "awtomobile",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.12.0",
+    "npm": "3.10.10"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -13,6 +17,9 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~8.3.24",
+    "@angular/compiler-cli": "~8.2.14",
+    "typescript": "~3.5.3",
     "@angular/animations": "~8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
