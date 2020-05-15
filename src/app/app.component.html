@@ -1,0 +1,116 @@
+<!-- SIDE FORM -->
+<div class="row">
+  <div class="col-sm-2">
+    <label class="bg-primary" style="color: white;"
+      >Which Type of car are you looking for?</label
+    >
+    <form>
+      <div class="form-group">
+        <label for="exampleFormBudget">Budget in Euro</label>
+        <input
+          name="budget"
+          type="number"
+          [(ngModel)]="budget"
+          class="form-control"
+          id="inputBudget"
+          value="3000"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFahrleistung"
+          >Fahrleistung pro jahr in KM</label
+        >
+        <input
+          name="km"
+          type="number"
+          [(ngModel)]="km"
+          min="0"
+          max="100000"
+          class="form-control"
+          value="15000"
+          id="inputFahrleistung"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputNutzung">Geplante Nutzung in Jahren</label>
+        <input
+          name="years"
+          type="number"
+          [(ngModel)]="years"
+          min="1"
+          max="10"
+          class="form-control"
+          id="inputNutzung"
+          value="3"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <button
+        type="button"
+        (click)="search()"
+        class="btn btn-success btn-lg btn-block"
+      >
+        Suchen
+      </button>
+    </form>
+  </div>
+  <!-- Result Content-->
+  <div class="col-sm-10">
+    <div class="border border-secondary" *ngFor="let car of cars">
+      <div *ngIf="car != null">
+        <button style="float:left;" type="button" class="btn btn-primary">
+          {{ car.calculation.score }} <span class="badge badge-light">{{ car.calculation.scoreNumber }}%</span>
+        </button>
+        <h4>
+          {{ car.details.vehicle.classification.make.formatted }}
+          {{ car.details.vehicle.classification.model.formatted }}
+        </h4>
+
+        <hr />
+
+        <div class="row">
+          <carousel class="col-sm-4 h-25 w-50 d-inline-block">
+            <slide *ngFor="let image of car.details.media.images">
+              <img class="rounded" src="{{ image.formats.jpg.size800x600 }}" />
+            </slide>
+          </carousel>
+          <div class="col-sm-4 border border-primary">
+            <h5>
+              Anschaffungskosten
+            </h5>
+            {{ car.calculation.anschaffungskosten }} €
+
+            <h5>
+              Variable Kosten nach Nutzung (KM und Jahren)
+            </h5>
+            <ul>
+              <li>
+                Verbrauchskosten: {{ car.calculation.verbrauchskosten }} €
+              </li>
+              <li>
+                Versicherungskosten: {{ car.calculation.versicherungskosten }} €
+              </li>
+              <li>Steuerkosten: {{ car.calculation.steuerkosten }} €</li>
+              <li>Reparaturkosten: {{ car.calculation.reparaturkosten }} €</li>
+            </ul>
+          </div>
+          <div class="col-sm-4 border border-primary">
+            <h5>
+              Gesamtkosten pro Jahr
+            </h5>
+            <ul>
+              <li>1. Jahr: {{ car.calculation.costsForFirstYear }} €</li>
+              <li>2. Jahr: {{ car.calculation.costsFor2ndYear }} €</li>
+              <li>3. Jahr: {{ car.calculation.costsFor3rdYear }} €</li>
+              <li>4. Jahr: {{ car.calculation.costsFor4thYear }} €</li>
+              <li>5. Jahr: {{ car.calculation.costsFor5thYear }} €</li>
+            </ul>
+            <h5>Kosten für die angebenen Jahre</h5>
+            <h5>{{ car.calculation.costsForYears }} €</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
