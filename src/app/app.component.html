@@ -17,9 +17,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputFahrleistung"
-          >Fahrleistung pro jahr in KM</label
-        >
+        <label for="exampleInputFahrleistung"> Mileage per year in KM</label>
         <input
           name="km"
           type="number"
@@ -33,7 +31,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputNutzung">Geplante Nutzung in Jahren</label>
+        <label for="exampleInputNutzung">Planned usage in years</label>
         <input
           name="years"
           type="number"
@@ -51,7 +49,7 @@
         (click)="search()"
         class="btn btn-success btn-lg btn-block"
       >
-        Suchen
+        Search
       </button>
     </form>
   </div>
@@ -59,8 +57,11 @@
   <div class="col-sm-10">
     <div class="border border-secondary" *ngFor="let car of cars">
       <div *ngIf="car != null">
-        <button style="float:left;" type="button" class="btn btn-primary">
-          {{ car.calculation.score }} <span class="badge badge-light">{{ car.calculation.scoreNumber }}%</span>
+        <button style="float: left;" type="button" class="btn btn-primary">
+          {{ car.calculation.score  }}
+          <span class="badge badge-light"
+            >{{ car.calculation.scoreNumber | number:'3.0-2' }}%</span
+          >
         </button>
         <h4>
           {{ car.details.vehicle.classification.make.formatted }}
@@ -77,36 +78,34 @@
           </carousel>
           <div class="col-sm-4 border border-primary">
             <h5>
-              Anschaffungskosten
+              Acquisition Cost
             </h5>
             {{ car.calculation.anschaffungskosten }} €
 
             <h5>
-              Variable Kosten nach Nutzung (KM und Jahren)
+              Variable Costs according to usage (KM and years)
             </h5>
             <ul>
+              <li>Use Costs: {{ car.calculation.verbrauchskosten }} €</li>
               <li>
-                Verbrauchskosten: {{ car.calculation.verbrauchskosten }} €
+                Insurance Costs: {{ car.calculation.versicherungskosten }} €
               </li>
-              <li>
-                Versicherungskosten: {{ car.calculation.versicherungskosten }} €
-              </li>
-              <li>Steuerkosten: {{ car.calculation.steuerkosten }} €</li>
-              <li>Reparaturkosten: {{ car.calculation.reparaturkosten }} €</li>
+              <li>Tax costs: {{ car.calculation.steuerkosten }} €</li>
+              <li>Repair costs: {{ car.calculation.reparaturkosten }} €</li>
             </ul>
           </div>
           <div class="col-sm-4 border border-primary">
             <h5>
-              Gesamtkosten pro Jahr
+              Total costs per year
             </h5>
             <ul>
-              <li>1. Jahr: {{ car.calculation.costsForFirstYear }} €</li>
-              <li>2. Jahr: {{ car.calculation.costsFor2ndYear }} €</li>
-              <li>3. Jahr: {{ car.calculation.costsFor3rdYear }} €</li>
-              <li>4. Jahr: {{ car.calculation.costsFor4thYear }} €</li>
-              <li>5. Jahr: {{ car.calculation.costsFor5thYear }} €</li>
+              <li>1st Year: {{ car.calculation.costsForFirstYear }} €</li>
+              <li>2nd Year: {{ car.calculation.costsFor2ndYear }} €</li>
+              <li>3rd Year: {{ car.calculation.costsFor3rdYear }} €</li>
+              <li>4th Year: {{ car.calculation.costsFor4thYear }} €</li>
+              <li>5th Year: {{ car.calculation.costsFor5thYear }} €</li>
             </ul>
-            <h5>Kosten für die angebenen Jahre</h5>
+            <h5>Costs for your specified years</h5>
             <h5>{{ car.calculation.costsForYears }} €</h5>
           </div>
         </div>
